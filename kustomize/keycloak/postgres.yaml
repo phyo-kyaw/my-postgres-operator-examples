@@ -23,15 +23,15 @@ spec:
                 matchLabels:
                   postgres-operator.crunchydata.com/cluster: keycloakdb
                   postgres-operator.crunchydata.com/instance-set: "00"
-  backups:
-    pgbackrest:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.36-0
-      repos:
-      - name: repo1
-        volume:
-          volumeClaimSpec:
-            accessModes:
-            - "ReadWriteOnce"
-            resources:
-              requests:
-                storage: 1Gi
+#  backups:
+#    pgbackrest:
+#      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.36-0
+#      repos:
+#      - name: repo1
+#        volume:
+#          volumeClaimSpec:
+#            accessModes:
+#            - "ReadWriteOnce"
+#            resources:
+#              requests:
+#                storage: 1Gi
