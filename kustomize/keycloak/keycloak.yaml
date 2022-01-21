@@ -15,8 +15,11 @@ spec:
         app.kubernetes.io/name: keycloak
     spec:
       containers:
-      - image: quay.io/keycloak/keycloak:latest
+      - image: quay.io/keycloak/keycloak:13.0.1
         name: keycloak
+        volumeMounts:
+        - name: keycloak-config
+          mountPath: /tmp/config
         env:
         - name: DB_VENDOR
           value: "postgres"
@@ -33,9 +36,11 @@ spec:
         - name: KEYCLOAK_USER
           value: "admin"
         - name: KEYCLOAK_PASSWORD
-          value: "admin"
+          value: "P6ssw0rd"
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
+        - name: KEYCLOAK_IMPORT
+          value: "/tmp/config/break-booking-realm-export.json"
         ports:
         - name: http
           containerPort: 8080
@@ -45,4 +50,9 @@ spec:
           httpGet:
             path: /auth/realms/master
             port: 8080
+      volumes:
+      - name: keycloak-config
+        configMap:
+          name: keycloak-config
       restartPolicy: Always
+
